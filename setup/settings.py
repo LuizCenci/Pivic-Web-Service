@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': "django.db.backends.postgresql",
+        'NAME': 'coletas_infantid',
+        'USER': 'admin',
+        'PASSWORD': "pD9LgngnXR9vNoDAc34CH8Y0d099DtZx",
+        'HOST': 'dpg-csp57rm8ii6s73c8mt3g-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
