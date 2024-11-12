@@ -53,6 +53,7 @@ class Cadastro(models.Model):
     class Meta:
         managed = False
         db_table = 'cadastro'
+        
 
     def __str__(self):
         return f'ID: {self.id_cadastro} - {self.id_responsavel.nome_responsavel}'
