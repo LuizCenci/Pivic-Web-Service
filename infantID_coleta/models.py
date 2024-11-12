@@ -11,7 +11,7 @@ from django.db import models
 class Agenda(models.Model):
     id_agenda = models.IntegerField(primary_key=True)
     data_agenda = models.DateField(blank=True, null=True)
-    tipo_rc = models.IntegerField(blank=True, null=True)
+    tipo_rc = models.CharField(max_length=20, blank=True, null=True)
     id_cadastro = models.ForeignKey('Cadastro', models.DO_NOTHING, db_column='id_cadastro', blank=True, null=True)
     id_responsavel = models.ForeignKey('Responsvel', models.DO_NOTHING, db_column='id_responsavel', blank=True, null=True)
     id_recoleta = models.ForeignKey('Recoleta', models.DO_NOTHING, db_column='id_recoleta', blank=True, null=True)
@@ -95,7 +95,7 @@ class Recoleta(models.Model):
 class Responsvel(models.Model):
     id_responsavel = models.CharField(primary_key=True, max_length=10)
     nome_responsavel = models.CharField(max_length=45, blank=True, null=True)
-    telefone_responsavel = models.BigIntegerField(blank=True, null=True)
+    telefone_responsavel = models.IntegerField(blank=True, null=True)
     endereco_cadastro = models.CharField(max_length=45, blank=True, null=True)
     bairro_cadastro = models.CharField(max_length=20, blank=True, null=True)
     endereco_atual = models.CharField(max_length=45, blank=True, null=True)
