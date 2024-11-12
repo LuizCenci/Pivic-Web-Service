@@ -29,6 +29,8 @@ class Agenda(models.Model):
         managed = False
         db_table = 'agenda'
 
+    def __str__(self):
+        return f'{self.tipo_rc} - {self.data_agenda} | {self.id_responsavel.nome_responsavel}'
 
 
 class Cadastro(models.Model):
@@ -52,6 +54,9 @@ class Cadastro(models.Model):
         managed = False
         db_table = 'cadastro'
 
+    def __str__(self):
+        return f'ID: {self.id_cadastro} - {self.id_responsavel.nome_responsavel}'
+
 
 class Coletista(models.Model):
     nome = models.CharField(primary_key=True, max_length=45)
@@ -59,6 +64,9 @@ class Coletista(models.Model):
     class Meta:
         managed = False
         db_table = 'coletista'
+
+    def __str__(self):
+        return self.nome
 
 
 class Desvinculo(models.Model):
@@ -72,6 +80,9 @@ class Desvinculo(models.Model):
         managed = False
         db_table = 'desvinculo'
 
+    def __str__(self):
+        return f'{self.idresponsavel.nome_responsavel} - {self.data_desvinculo}'
+
 
 
 class Hospital(models.Model):
@@ -80,6 +91,9 @@ class Hospital(models.Model):
     class Meta:
         managed = False
         db_table = 'hospital'
+    
+    def __str__(self):
+        return self.nome
 
 
 class Materiais(models.Model):
@@ -94,6 +108,7 @@ class Materiais(models.Model):
         db_table = 'materiais'
 
 
+
 class Recoleta(models.Model):
     id_recoleta = models.IntegerField(primary_key=True)
     scanner = models.CharField(max_length=20, blank=True, null=True)
@@ -103,6 +118,9 @@ class Recoleta(models.Model):
     class Meta:
         managed = False
         db_table = 'recoleta'
+
+    def __str__(self):
+        return f'{self.idcadastro} - {self.data_recoleta}'
 
 
 class Responsvel(models.Model):
@@ -117,3 +135,6 @@ class Responsvel(models.Model):
     class Meta:
         managed = False
         db_table = 'responsável'
+
+    def __str__(self):
+        return f'{self.id_responsavel} - {self.nome_responsavel}'
