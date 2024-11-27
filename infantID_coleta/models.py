@@ -16,11 +16,11 @@ class Agenda(models.Model):
         ('2 Meses', '2 Meses'),
         ('3 Meses', '3 Meses'),
         ('6 Meses', '6 Meses'),
-        ('1 Ano', '1 Ano'),
+        ('1 Ano', '1 Ano'), 
     ]
-    id_agenda = models.IntegerField(primary_key=True, serialize=True)
+    id_agenda = models.AutoField(primary_key=True, serialize=True)
     data_agenda = models.DateField(blank=True, null=True)
-    tipo_rc = models.CharField(max_length=20, blank=True, null=True)
+    tipo_rc = models.CharField(max_length=20,choices=choices_rc, blank=True, null=True)
     id_cadastro = models.ForeignKey('Cadastro', models.DO_NOTHING, db_column='id_cadastro', blank=True, null=True)
     id_responsavel = models.ForeignKey('Responsvel', models.DO_NOTHING, db_column='id_responsavel', blank=True, null=True)
     id_recoleta = models.ForeignKey('Recoleta', models.DO_NOTHING, db_column='id_recoleta', blank=True, null=True)
@@ -71,7 +71,7 @@ class Coletista(models.Model):
 
 
 class Desvinculo(models.Model):
-    id_desvinculo = models.IntegerField(primary_key=True)
+    id_desvinculo = models.AutoField(serialize=True, primary_key=True)
     data_desvinculo = models.DateField(blank=True, null=True)
     motivo = models.CharField(max_length=50, blank=True, null=True)
     id_cadastro = models.ForeignKey(Cadastro, models.DO_NOTHING, db_column='id_cadastro', blank=True, null=True)
@@ -98,7 +98,7 @@ class Hospital(models.Model):
 
 
 class Materiais(models.Model):
-    id_materiais = models.IntegerField(primary_key=True)
+    id_materiais = models.AutoField(primary_key=True)
     carteirinha = models.BooleanField(blank=True, null=True)
     mordedor = models.BooleanField(blank=True, null=True)
     gorro = models.BooleanField(blank=True, null=True)
@@ -111,7 +111,7 @@ class Materiais(models.Model):
 
 
 class Recoleta(models.Model):
-    id_recoleta = models.IntegerField(primary_key=True)
+    id_recoleta = models.AutoField(serialize=True, primary_key=True)
     scanner = models.CharField(max_length=20, blank=True, null=True)
     data_recoleta = models.DateField(blank=True, null=True)
     idcadastro = models.ForeignKey(Cadastro, models.DO_NOTHING, db_column='idcadastro', blank=True, null=True)
