@@ -58,3 +58,13 @@ class cadastro_Agenda(forms.ModelForm):
             'id_responsavel':'Selecionar Responsável',
             'id_recoleta':'Selecionar Recoleta',
         }
+
+class cadastro_Recoleta(forms.ModelForm):
+    class Meta:
+        model = Recoleta
+        exclude = ['id_recoleta']
+        labels = {
+            'scanner':'Scanner',
+            'data_recoleta':'Data da Recoleta',
+            'idcadastro':'ID Cadastrado',
+        }

@@ -60,3 +60,14 @@ def nova_agenda(request):
 
     context = {'form':agenda}
     return render(request, 'nova_agenda.html', context)
+
+def nova_recoleta(request):
+    recoleta = cadastro_Recoleta()
+    if request.method == 'POST':
+        recoleta = cadastro_Recoleta(request.POST)
+        if recoleta.is_valid():
+            recoleta.save()
+            return redirect('formulario:index')
+
+    context = {'form':recoleta}
+    return render(request, 'nova_recoleta.html', context)
