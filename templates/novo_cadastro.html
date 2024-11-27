@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Cadastro</title>
-</head>
-<body>
-    <section>
+{%extends 'base.html'%}
+{%block content%}
         <h1>Adicionar Cadastro</h1>
         <form  action="{% url 'formulario:novo_cadastro' %}" method="POST" enctype="">
             {%csrf_token%}
@@ -19,7 +12,4 @@
                 <button>
                     Salvar
                 </button>
-    </body>
-    </section>
-</body>
-</html>
+{%endblock%}
