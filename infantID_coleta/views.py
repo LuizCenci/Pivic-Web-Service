@@ -4,7 +4,8 @@ from infantID_coleta.forms import *
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'partials/index.html')
+
 
 def novo_responsavel(request):
     responsavel = cadastro_responsavel()
@@ -15,7 +16,8 @@ def novo_responsavel(request):
             return redirect('formulario:index')
 
     context = {'form':responsavel}
-    return render(request, 'novo_responsavel.html', context)
+    return render(request, 'pages/novo_responsavel.html', context)
+
 
 def novo_cadastro(request):
     cadastro = cadastro_coleta()
@@ -26,7 +28,8 @@ def novo_cadastro(request):
             return redirect('formulario:index')
 
     context = {'form':cadastro}
-    return render(request, 'novo_cadastro.html', context)
+    return render(request, 'pages/novo_cadastro.html', context)
+
 
 def novo_coletista(request):
     coletista = cadastro_coletista()
@@ -37,7 +40,8 @@ def novo_coletista(request):
             return redirect('formulario:index')
 
     context = {'form':coletista}
-    return render(request, 'novo_coletista.html', context)
+    return render(request, 'pages/novo_coletista.html', context)
+
 
 def novo_hospital(request):
     hospital = cadastro_hospital()
@@ -48,7 +52,8 @@ def novo_hospital(request):
             return redirect('formulario:index')
 
     context = {'form':hospital}
-    return render(request, 'novo_hospital.html', context)
+    return render(request, 'pages/novo_hospital.html', context)
+
 
 def nova_agenda(request):
     agenda = cadastro_Agenda()
@@ -59,4 +64,4 @@ def nova_agenda(request):
             return redirect('formulario:index')
 
     context = {'form':agenda}
-    return render(request, 'nova_agenda.html', context)
+    return render(request, 'pages/nova_agenda.html', context)

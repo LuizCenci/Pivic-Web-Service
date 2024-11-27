@@ -1,6 +1,14 @@
 from django import forms
 from infantID_coleta.models import *
 
+
+def add_attr(field, attr_name, attr_new_val):
+    existing = field.widget.attrs.get(attr_name, '')
+    field.widget.attrs[attr_name] = f'{existing} {attr_new_val}'.strip()
+
+def add_placeholder(field, placeholder_val):
+    add_attr(field, 'placeholder', placeholder_val)
+
 class cadastro_responsavel(forms.ModelForm):
     class Meta:
         model = Responsvel
@@ -12,6 +20,14 @@ class cadastro_responsavel(forms.ModelForm):
             'endereco_cadastro':'Endereço',
             'bairro_cadastro':'Bairro',
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_placeholder(self.fields['id_responsavel'], 'Ex: LC, JC2')
+        add_placeholder(self.fields['nome_responsavel'], 'Ex: Jõao das Graças')
+        add_placeholder(self.fields['telefone_responsavel'], 'Ex: 46992143985')
+        add_placeholder(self.fields['endereco_cadastro'], 'Ex: Av. Tupo')
+        add_placeholder(self.fields['bairro_cadastro'], 'Ex: Centro')
         
 class cadastro_coleta(forms.ModelForm):
     class Meta:
