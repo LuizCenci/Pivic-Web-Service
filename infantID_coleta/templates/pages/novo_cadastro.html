@@ -8,7 +8,7 @@
 <body>
     <section>
         <h1>Adicionar Cadastro</h1>
-        <form  action="{% url 'formulario:novo_cadastro' %}" method="POST" enctype="">
+        <form  action="{% url 'formulario:novo_cadastro_create' %}" method="POST" enctype="">
             {%csrf_token%}
                 {%for field in form%}
                 <div>
@@ -16,9 +16,10 @@
                     {{field}}
                 </div>
                 {%endfor%}
-                <button>
+                <button type="submit">
                     Salvar
                 </button>
+            </form>
     </body>
     </section>
 </body>

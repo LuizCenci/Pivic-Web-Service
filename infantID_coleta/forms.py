@@ -26,15 +26,14 @@ class cadastro_responsavel(forms.ModelForm):
         add_placeholder(self.fields['id_responsavel'], 'Ex: LC, JC2')
         add_placeholder(self.fields['nome_responsavel'], 'Ex: Jõao das Graças')
         add_placeholder(self.fields['telefone_responsavel'], 'Ex: 46992143985')
-        add_placeholder(self.fields['endereco_cadastro'], 'Ex: Av. Tupo')
+        add_placeholder(self.fields['endereco_cadastro'], 'Ex: Av. Tupi')
         add_placeholder(self.fields['bairro_cadastro'], 'Ex: Centro')
         
 class cadastro_coleta(forms.ModelForm):
     class Meta:
         model = Cadastro
-        exclude = ['',]
+        exclude = ['id_cadastro',]
         labels = {
-            'id_cadastro':'ID',
             'peso':'Peso',
             'altura':'Altura',
             'semanas_gestacao':'Semanas de Gestação',
@@ -46,6 +45,14 @@ class cadastro_coleta(forms.ModelForm):
             'nome_coletista':'Selecionar Coletista',
             'id_responsavel':'Selecionar Responsável'
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_placeholder(self.fields['peso'], 'Ex: 3.781')
+        add_placeholder(self.fields['altura'], 'Em Cm, ex: 55')
+        add_placeholder(self.fields['semanas_gestacao'], 'Ex: 32')
+        add_placeholder(self.fields['semanas_gestacao'], 'Ex: Scanner1')
+
 
 class cadastro_coletista(forms.ModelForm):
     class Meta:

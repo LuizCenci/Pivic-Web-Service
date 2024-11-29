@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import Http404
 from infantID_coleta.models import *
 from infantID_coleta.forms import *
 
@@ -19,16 +20,40 @@ def novo_responsavel(request):
     return render(request, 'pages/novo_responsavel.html', context)
 
 
-def novo_cadastro(request):
-    cadastro = cadastro_coleta()
-    if request.method == 'POST':
-        cadastro = cadastro_coleta(request.POST)
-        if cadastro.is_valid():
-            cadastro.save()
-            return redirect('formulario:index')
+def novo_cadastro_view(request):
 
-    context = {'form':cadastro}
+    cadastro_form_data = request.session.get('cadastro_form_data', None)
+
+    form = cadastro_coleta(cadastro_form_data)
+    context = {'form': form}
     return render(request, 'pages/novo_cadastro.html', context)
+
+
+
+def novo_cadastro_create(request):
+    if not request.POST:
+        raise Http404
+    
+    POST = request.POST
+    request.session['cadastro_form_data'] = POST
+
+    form = cadastro_coleta(POST)
+    if form.is_valid():
+        infos = form.save(commit=False)  
+
+        n_filhos = Cadastro.objects.filter(id_responsavel=infos.id_responsavel).count()
+        infos.id_cadastro = f'{infos.id_responsavel.id_responsavel}_0{n_filhos + 1}'
+        infos.save()
+
+        del request.session['cadastro_form_data']
+
+        #messages.success(request, 'Cadastro criado com sucesso!')
+
+        return redirect('formulario:index') 
+
+    return redirect('novo_cadastro_view')  
+
+
 
 
 def novo_coletista(request):
