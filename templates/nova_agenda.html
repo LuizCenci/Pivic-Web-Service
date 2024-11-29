@@ -1,6 +1,6 @@
 {%extends 'base.html'%}
 {%block content%}
-        <h1>Adicionar Agenda</h1>
+        <h1 class="main__title">Adicionar Agenda</h1>
         <form  action="{% url 'formulario:nova_agenda' %}" method="POST" enctype="">
             {%csrf_token%}
                 {%for field in form%}

@@ -1,6 +1,6 @@
 {%extends 'base.html'%}
 {%block content%}
-        <h1>Adicionar Responsável</h1>
+        <h1 class="main__title">Adicionar Responsável</h1>
         <form  action="{% url 'formulario:novo_responsavel' %}" method="POST" enctype="">
             {%csrf_token%}
                 {%for field in form%}
