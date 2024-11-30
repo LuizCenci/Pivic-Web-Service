@@ -1,4 +1,5 @@
-
+{%extends 'base.html'%}
+{%block content%}
 <h1 class="main__title">Cadastro de informações</h1>
         <div class="container">
             <a id="container__btn" class="btn btn-info" href="{%url 'formulario:novo_responsavel'%}">Cadastrar Responsável</a>
@@ -7,4 +8,5 @@
             <a id="container__btn" class="btn btn-info" href="{%url 'formulario:novo_hospital'%}">Cadastrar Hospital</a>
             <a id="container__btn" class="btn btn-info" href="{%url 'formulario:nova_agenda'%}">Adicionar Agenda</a>
             <a id="container__btn" class="btn btn-info" href="{%url 'formulario:nova_recoleta'%}">Adicionar Recoleta</a>
-        </div>
+        </div>  
+{%endblock%}

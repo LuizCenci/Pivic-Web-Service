@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar responsável</title>
-</head>
-<body>
-    <section>
-        <h1>Adicionar Responsável</h1>
+{%extends 'base.html'%}
+{%block content%}
+        <h1 class="main__title">Adicionar Responsável</h1>
         <form  action="{% url 'formulario:novo_responsavel' %}" method="POST" enctype="">
             {%csrf_token%}
                 {%for field in form%}
@@ -16,10 +9,8 @@
                     {{field}}
                 </div>
                 {%endfor%}
-                <button>
+                <button class="btn btn-success">
                     Salvar
                 </button>
-    </body>
-    </section>
-    
-</html> 
+                <a class="btn btn-danger" href="{% url 'formulario:index' %}">Voltar ao Menu</a>
+{%endblock%}

@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Coletista</title>
-</head>
-<body>
-    <section>
-        <h1>Adicionar Coletista</h1>
+{%extends 'base.html'%}
+{%block content%}
+        <h1 class="main__title">Adicionar Coletista</h1>
         <form  action="{% url 'formulario:novo_coletista' %}" method="POST" enctype="">
             {%csrf_token%}
                 {%for field in form%}
@@ -16,10 +9,8 @@
                     {{field}}
                 </div>
                 {%endfor%}
-                <button>
+                <button class="btn btn-success">
                     Salvar
                 </button>
-    </body>
-    </section>
-</body>
-</html>
+                <a class="btn btn-danger" href="{% url 'formulario:index' %}">Voltar ao Menu</a>
+{%endblock%}

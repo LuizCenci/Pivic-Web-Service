@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Cadastro</title>
-</head>
-<body>
-    <section>
-        <h1>Adicionar Cadastro</h1>
-        <form  action="{% url 'formulario:novo_cadastro_create' %}" method="POST" enctype="">
+{%extends 'base.html'%}
+{%block content%}
+        <h1 class="main__title">Adicionar Cadastro</h1>
+        <form  action="{% url 'formulario:novo_cadastro' %}" method="POST" enctype="">
             {%csrf_token%}
                 {%for field in form%}
                 <div>
@@ -16,11 +9,8 @@
                     {{field}}
                 </div>
                 {%endfor%}
-                <button type="submit">
+                <button class="btn btn-success">
                     Salvar
                 </button>
-            </form>
-    </body>
-    </section>
-</body>
-</html>
+                <a class="btn btn-danger" href="{% url 'formulario:index' %}">Voltar ao Menu</a>
+{%endblock%}
