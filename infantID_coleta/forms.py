@@ -1,6 +1,14 @@
 from django import forms
 from infantID_coleta.models import *
 
+
+def add_attr(field, attr_name, attr_new_val):
+    existing = field.widget.attrs.get(attr_name, '')
+    field.widget.attrs[attr_name] = f'{existing} {attr_new_val}'.strip()
+
+def add_placeholder(field, placeholder_val):
+    add_attr(field, 'placeholder', placeholder_val)
+
 class cadastro_responsavel(forms.ModelForm):
     class Meta:
         model = Responsvel
@@ -19,13 +27,21 @@ class cadastro_responsavel(forms.ModelForm):
             'endereco_cadastro':forms.TextInput(attrs={'class':'form-control'}),
             'bairro_cadastro':forms.TextInput(attrs={'class':'form-control'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_placeholder(self.fields['id_responsavel'], 'Ex: LC, JC2')
+        add_placeholder(self.fields['nome_responsavel'], 'Ex: Jõao das Graças')
+        add_placeholder(self.fields['telefone_responsavel'], 'Ex: 46992143985')
+        add_placeholder(self.fields['endereco_cadastro'], 'Ex: Av. Tupi')
+        add_placeholder(self.fields['bairro_cadastro'], 'Ex: Centro')
+        
         
 class cadastro_coleta(forms.ModelForm):
     class Meta:
         model = Cadastro
-        exclude = ['',]
+        exclude = ['id_cadastro',]
         labels = {
-            'id_cadastro':'ID',
             'peso':'Peso',
             'altura':'Altura',
             'semanas_gestacao':'Semanas de Gestação',
@@ -56,6 +72,16 @@ class cadastro_coleta(forms.ModelForm):
             'nome_coletista':forms.Select(attrs={'class':'form-control'}),
             'id_responsavel':forms.Select(attrs={'class':'form-control'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_placeholder(self.fields['peso'], 'Ex: 3.781')
+        add_placeholder(self.fields['altura'], 'Em Cm, ex: 55')
+        add_placeholder(self.fields['semanas_gestacao'], 'Ex: 32')
+        add_placeholder(self.fields['semanas_gestacao'], 'Ex: Scanner1')
+
+
+    
 class cadastro_coletista(forms.ModelForm):
     class Meta:
         model = Coletista

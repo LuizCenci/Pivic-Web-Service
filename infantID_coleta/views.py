@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.http import Http404
 from infantID_coleta.models import *
 from infantID_coleta.forms import *
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'partials/index.html')
+
 
 def novo_responsavel(request):
     responsavel = cadastro_responsavel()
@@ -15,18 +17,44 @@ def novo_responsavel(request):
             return redirect('formulario:index')
 
     context = {'form':responsavel}
-    return render(request, 'novo_responsavel.html', context)
+    return render(request, 'pages/novo_responsavel.html', context)
 
-def novo_cadastro(request):
-    cadastro = cadastro_coleta()
-    if request.method == 'POST':
-        cadastro = cadastro_coleta(request.POST)
-        if cadastro.is_valid():
-            cadastro.save()
-            return redirect('formulario:index')
 
-    context = {'form':cadastro}
-    return render(request, 'novo_cadastro.html', context)
+def novo_cadastro_view(request):
+
+    cadastro_form_data = request.session.get('cadastro_form_data', None)
+
+    form = cadastro_coleta(cadastro_form_data)
+    context = {'form': form}
+    return render(request, 'pages/novo_cadastro.html', context)
+
+
+
+def novo_cadastro_create(request):
+    if not request.POST:
+        raise Http404
+    
+    POST = request.POST
+    request.session['cadastro_form_data'] = POST
+
+    form = cadastro_coleta(POST)
+    if form.is_valid():
+        infos = form.save(commit=False)  
+
+        n_filhos = Cadastro.objects.filter(id_responsavel=infos.id_responsavel).count()
+        infos.id_cadastro = f'{infos.id_responsavel.id_responsavel}_0{n_filhos + 1}'
+        infos.save()
+
+        del request.session['cadastro_form_data']
+
+        #messages.success(request, 'Cadastro criado com sucesso!')
+
+        return redirect('formulario:index') 
+
+    return redirect('novo_cadastro_view')  
+
+
+
 
 def novo_coletista(request):
     coletista = cadastro_coletista()
@@ -37,7 +65,8 @@ def novo_coletista(request):
             return redirect('formulario:index')
 
     context = {'form':coletista}
-    return render(request, 'novo_coletista.html', context)
+    return render(request, 'pages/novo_coletista.html', context)
+
 
 def novo_hospital(request):
     hospital = cadastro_hospital()
@@ -48,7 +77,8 @@ def novo_hospital(request):
             return redirect('formulario:index')
 
     context = {'form':hospital}
-    return render(request, 'novo_hospital.html', context)
+    return render(request, 'pages/novo_hospital.html', context)
+
 
 def nova_agenda(request):
     agenda = cadastro_Agenda()
@@ -59,7 +89,7 @@ def nova_agenda(request):
             return redirect('formulario:index')
 
     context = {'form':agenda}
-    return render(request, 'nova_agenda.html', context)
+    return render(request, 'pages/nova_agenda.html', context)
 
 def nova_recoleta(request):
     recoleta = cadastro_Recoleta()
@@ -70,4 +100,4 @@ def nova_recoleta(request):
             return redirect('formulario:index')
 
     context = {'form':recoleta}
-    return render(request, 'nova_recoleta.html', context)
+    return render(request, 'pages/nova_recoleta.html', context)
