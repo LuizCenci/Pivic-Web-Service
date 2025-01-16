@@ -12,20 +12,29 @@ def add_placeholder(field, placeholder_val):
 class cadastro_responsavel(forms.ModelForm):
     class Meta:
         model = Responsvel
-        exclude = ['endereco_atual', 'bairro_atual']
+        exclude = ['endereco_atual', 'bairro_atual', ]
         labels = {
+            'pais': '',
             'id_responsavel':'ID',
             'nome_responsavel':'Nome do Responsável',
             'telefone_responsavel':'Telefone',
-            'endereco_cadastro':'Endereço',
+            'cep': 'CEP',
+            'estado': 'Estado',
+            'cidade': 'Cidade',
             'bairro_cadastro':'Bairro',
+            'endereco_cadastro':'Endereço',
         }
         widgets = {
+            'pais': forms.HiddenInput(),
             'id_responsavel':forms.TextInput(attrs={'class':'form-control'}),
             'nome_responsavel':forms.TextInput(attrs={'class':'form-control'}),
             'telefone_responsavel':forms.TextInput(attrs={'class':'form-control'}),
+            'cep':forms.TextInput(attrs={'class':'form-control'}),
+            'estado': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+            'cidade': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
             'endereco_cadastro':forms.TextInput(attrs={'class':'form-control'}),
             'bairro_cadastro':forms.TextInput(attrs={'class':'form-control'}),
+
         }
 
     def __init__(self, *args, **kwargs):
