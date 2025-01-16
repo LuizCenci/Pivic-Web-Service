@@ -87,7 +87,7 @@ class cadastro_coleta(forms.ModelForm):
         add_placeholder(self.fields['peso'], 'Ex: 3.781')
         add_placeholder(self.fields['altura'], 'Em Cm, ex: 55')
         add_placeholder(self.fields['semanas_gestacao'], 'Ex: 32')
-        add_placeholder(self.fields['semanas_gestacao'], 'Ex: Scanner1')
+        add_placeholder(self.fields['scanner'], 'Ex: Scanner1')
 
 
     

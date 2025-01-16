@@ -1,7 +1,7 @@
-{%extends 'pages/base.html'%}
+{%extends 'partials/base.html'%}
 {%block content%}
         <h1 class="main__title">Adicionar Cadastro</h1>
-        <form  action="{% url 'formulario:novo_cadastro' %}" method="POST" enctype="">
+        <form  action="{% url 'formulario:novo_cadastro_create' %}" method="POST" enctype="">
             {%csrf_token%}
                 {%for field in form%}
                 <div>
