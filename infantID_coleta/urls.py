@@ -10,5 +10,6 @@ urlpatterns = [
     path('novo-coletista/', novo_coletista, name='novo_coletista'),
     path('novo-hospital/', novo_hospital, name='novo_hospital'),
     path('nova-agenda/', nova_agenda, name='nova_agenda'),
-    path('nova-recoleta/', nova_recoleta, name='nova_recoleta'),
+    path('nova-recoleta/', nova_recoleta_view, name='nova_recoleta'),
+    path('nova-recoleta/create', nova_recoleta_create, name='nova_recoleta_create'),
 ]       
