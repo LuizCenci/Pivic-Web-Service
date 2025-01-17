@@ -26,7 +26,7 @@ class Agenda(models.Model):
     id_recoleta = models.ForeignKey('Recoleta', models.DO_NOTHING, db_column='id_recoleta', blank=True, null=True)
 
     class Meta:
-        managed = False
+        
         db_table = 'agenda'
 
     def __str__(self):
@@ -51,7 +51,7 @@ class Cadastro(models.Model):
     id_responsavel = models.ForeignKey('Responsvel', models.DO_NOTHING, db_column='id_responsavel', blank=True, null=True)
 
     class Meta:
-        managed = False
+        
         db_table = 'cadastro'
         
 
@@ -63,7 +63,7 @@ class Coletista(models.Model):
     nome = models.CharField(primary_key=True, max_length=45)
 
     class Meta:
-        managed = False
+        
         db_table = 'coletista'
 
     def __str__(self):
@@ -78,7 +78,7 @@ class Desvinculo(models.Model):
     idresponsavel = models.ForeignKey('Responsvel', models.DO_NOTHING, db_column='idresponsável', blank=True, null=True)
 
     class Meta:
-        managed = False
+        
         db_table = 'desvinculo'
 
     def __str__(self):
@@ -90,7 +90,7 @@ class Hospital(models.Model):
     nome = models.CharField(primary_key=True, max_length=45)
 
     class Meta:
-        managed = False
+        
         db_table = 'hospital'
     
     def __str__(self):
@@ -105,7 +105,7 @@ class Materiais(models.Model):
     id_cadastro = models.ForeignKey(Cadastro, models.DO_NOTHING, db_column='id_cadastro', blank=True, null=True)
 
     class Meta:
-        managed = False
+        
         db_table = 'materiais'
 
 
@@ -117,7 +117,7 @@ class Recoleta(models.Model):
     idcadastro = models.ForeignKey(Cadastro, models.DO_NOTHING, db_column='idcadastro', blank=True, null=True)
 
     class Meta:
-        managed = False
+        
         db_table = 'recoleta'
 
     def __str__(self):
@@ -134,7 +134,7 @@ class Responsvel(models.Model):
     bairro_atual = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
-        managed = False
+        
         db_table = 'responsável'
 
     def __str__(self):
