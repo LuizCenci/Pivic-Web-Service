@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.postgresql",
-        'NAME': 'coletas',
+        'NAME': os.getenv('DB_NAME'),
         'USER': 'postgres',
-        'PASSWORD': "2803",
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
