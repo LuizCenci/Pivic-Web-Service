@@ -155,9 +155,15 @@ class cadastro_Recoleta(forms.ModelForm):
             'scanner':'Scanner',
             'data_recoleta':'Data da Recoleta',
             'idcadastro':'ID Cadastrado',
+            'n_dedos':'Nº de Dedos Coletados',
+            'justificativa':'Justificativa',
         }
         widgets ={
             'scanner':forms.TextInput(attrs={'class':'form-control'}),
+            'n_dedos':forms.TextInput(attrs={'class':'form-control'}),
+            'justificativa':forms.Textarea(
+                attrs={'class':'form-control', 'rows':'3'}
+                ),
             'data_recoleta':forms.DateInput(
                 format = '%d/%m/%Y',
                 attrs={
