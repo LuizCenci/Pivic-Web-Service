@@ -1,5 +1,6 @@
 from django import forms
 from infantID_coleta.models import *
+from django.core.exceptions import ValidationError
 
 
 def add_attr(field, attr_name, attr_new_val):
@@ -55,6 +56,8 @@ class cadastro_coleta(forms.ModelForm):
             'altura':'Altura',
             'semanas_gestacao':'Semanas de Gestação',
             'sexo':'Sexo',
+            'n_dedos':'Nº de Dedos Coletados',
+            'justificativa':'Justificativa',
             'scanner':'Scanner',
             'data_coleta':'Data da Coleta',
             'observacao':'Observações',
@@ -68,6 +71,10 @@ class cadastro_coleta(forms.ModelForm):
             'altura':forms.TextInput(attrs={'class':'form-control'}),
             'semanas_gestacao':forms.TextInput(attrs={'class':'form-control'}),
             'sexo':forms.Select(attrs={'class':'form-control'}),
+            'n_dedos':forms.TextInput(attrs={'class':'form-control'}),
+            'justificativa':forms.Textarea(
+                attrs={'class':'form-control', 'rows':'3'}
+                ),
             'scanner':forms.TextInput(attrs={'class':'form-control'}),
             'data_coleta':forms.DateInput(
                 format = '%d/%m/%Y',
@@ -76,18 +83,20 @@ class cadastro_coleta(forms.ModelForm):
                     'class':'form-control'
                 }
             ),
-            'observacao':forms.Textarea(attrs={'class':'form-control'}),
+            'observacao':forms.Textarea(attrs={'class':'form-control', 'rows':'3'}),
             'nome_hospital':forms.Select(attrs={'class':'form-control'}),
             'nome_coletista':forms.Select(attrs={'class':'form-control'}),
             'id_responsavel':forms.Select(attrs={'class':'form-control'}),
         }
 
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         add_placeholder(self.fields['peso'], 'Ex: 3.781')
         add_placeholder(self.fields['altura'], 'Em Cm, ex: 55')
         add_placeholder(self.fields['semanas_gestacao'], 'Ex: 32')
         add_placeholder(self.fields['scanner'], 'Ex: Scanner1')
+        add_placeholder(self.fields['n_dedos'], 'Deve ser maior ou igual a 14')
 
 
     

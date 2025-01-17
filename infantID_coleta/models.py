@@ -42,6 +42,8 @@ class Cadastro(models.Model):
     altura = models.IntegerField(blank=True, null=True)
     semanas_gestacao = models.IntegerField(blank=True, null=True)
     sexo = models.CharField(max_length=1,choices=opcoes_sexo, blank=True, null=True)
+    n_dedos = models.PositiveIntegerField(blank=True, null=True)
+    justificativa = models.CharField(max_length=30, blank=True, null=True)
     scanner = models.CharField(max_length=20, blank=True, null=True)
     data_coleta = models.DateField(blank=True, null=True)
     observacao = models.CharField(max_length=100, blank=True, null=True)

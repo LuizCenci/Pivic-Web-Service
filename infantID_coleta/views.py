@@ -41,7 +41,12 @@ def novo_cadastro_create(request):
     form = cadastro_coleta(POST)
     if form.is_valid():
         infos = form.save(commit=False)
-
+        
+        n_dedos = infos.n_dedos
+        if n_dedos < 14 and not infos.justificativa:
+            messages.error(request, 'Como o número de dedos foi menor que 14, deve fornecer uma justificativa')
+            return redirect('formulario:novo_cadastro_view')
+        
         n_filhos = Cadastro.objects.filter(id_responsavel=infos.id_responsavel).count()
         infos.id_cadastro = f'{infos.id_responsavel.id_responsavel}_0{n_filhos + 1}'
         infos.save()
