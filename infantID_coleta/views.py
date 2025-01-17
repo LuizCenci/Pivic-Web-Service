@@ -98,14 +98,34 @@ def nova_agenda(request):
     context = {'form':agenda}
     return render(request, 'pages/nova_agenda.html', context)
 
-def nova_recoleta(request):
-    recoleta = cadastro_Recoleta()
-    if request.method == 'POST':
-        recoleta = cadastro_Recoleta(request.POST)
-        if recoleta.is_valid():
-            recoleta.save()
-            messages.success(request, 'Recoleta adicionada com sucesso!')
-            return redirect('formulario:index')
-
-    context = {'form':recoleta}
+def nova_recoleta_view(request):
+    recoleta_form_data = request.session.get('recoleta_form_data', None)
+    form = cadastro_Recoleta(recoleta_form_data)
+    context = {'form':form}
     return render(request, 'pages/nova_recoleta.html', context)
+
+def nova_recoleta_create(request):
+    if not request.POST:
+        raise Http404
+    
+    POST = request.POST
+    request.session['recoleta_form_data'] = POST
+
+    form = cadastro_Recoleta(POST)
+    if form.is_valid():
+        infos = form.save(commit=False)
+
+        n_dedos = infos.n_dedos
+        if n_dedos < 14 and not infos.justificativa:
+            messages.error(request, 'Como o número de dedos foi menor que 14, deve fornecer uma justificativa')
+            return redirect('formulario:nova_recoleta')
+        
+        infos.save()
+
+        del request.session['recoleta_form_data']
+
+        messages.success(request, 'Recoleta adicionada com sucesso!')
+
+        return redirect('formulario:index')
+
+    return redirect('formulario:nova_recoleta')

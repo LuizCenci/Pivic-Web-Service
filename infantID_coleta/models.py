@@ -109,6 +109,8 @@ class Materiais(models.Model):
 class Recoleta(models.Model):
     id_recoleta = models.AutoField(serialize=True, primary_key=True)
     scanner = models.CharField(max_length=20, blank=True, null=True)
+    n_dedos = models.PositiveIntegerField(blank=True, null=True)
+    justificativa = models.CharField(max_length=30, blank=True, null=True)
     data_recoleta = models.DateField(blank=True, null=True)
     idcadastro = models.ForeignKey(Cadastro, models.DO_NOTHING, db_column='idcadastro', blank=True, null=True)
 

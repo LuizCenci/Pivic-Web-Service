@@ -1,7 +1,7 @@
 {%extends 'partials/base.html'%}
 {%block content%}
         <h1 class="main__title">Adicionar Recoleta</h1>
-        <form  action="{% url 'formulario:nova_recoleta' %}" method="POST" enctype="">
+        <form  action="{% url 'formulario:nova_recoleta_create' %}" method="POST" enctype="">
             {%csrf_token%}
                 {%for field in form%}
                 <div>
