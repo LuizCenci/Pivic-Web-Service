@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.postgresql",
-        'NAME': 'infantid_db',
+        'NAME': 'coletas',
         'USER': 'postgres',
-        'PASSWORD': "postgres",
+        'PASSWORD': "2803",
         'HOST': 'localhost',
         'PORT': '5432',
     }
