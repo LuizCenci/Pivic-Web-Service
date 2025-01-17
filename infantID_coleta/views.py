@@ -10,22 +10,21 @@ def index(request):
 
 
 def novo_responsavel(request):
-    responsavel = cadastro_responsavel()
     if request.method == 'POST':
         responsavel = cadastro_responsavel(request.POST)
         if responsavel.is_valid():
             responsavel.save()
             messages.success(request, 'Responsável adicionado com sucesso!')
             return redirect('formulario:index')
+    else:
+        responsavel = cadastro_responsavel()
 
     context = {'form':responsavel}
     return render(request, 'pages/novo_responsavel.html', context)
 
 
 def novo_cadastro_view(request):
-
     cadastro_form_data = request.session.get('cadastro_form_data', None)
-
     form = cadastro_coleta(cadastro_form_data)
     context = {'form': form}
     return render(request, 'pages/novo_cadastro.html', context)
@@ -42,7 +41,12 @@ def novo_cadastro_create(request):
     form = cadastro_coleta(POST)
     if form.is_valid():
         infos = form.save(commit=False)
-
+        
+        n_dedos = infos.n_dedos
+        if n_dedos < 14 and not infos.justificativa:
+            messages.error(request, 'Como o número de dedos foi menor que 14, deve fornecer uma justificativa')
+            return redirect('formulario:novo_cadastro_view')
+        
         n_filhos = Cadastro.objects.filter(id_responsavel=infos.id_responsavel).count()
         infos.id_cadastro = f'{infos.id_responsavel.id_responsavel}_0{n_filhos + 1}'
         infos.save()

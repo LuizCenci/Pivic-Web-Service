@@ -47,3 +47,10 @@ time, mark, audio, video {
     text-align: center;
     font-family: "Roboto", sans-serif;
 }
+
+input[readonly] {
+    background-color: #f0f0f0; /* Cinza claro */
+    color: #333; /* Texto cinza escuro */
+    border-color: #ccc; /* Borda cinza */
+    cursor: not-allowed; /* Ícone de "não permitido" */
+}
