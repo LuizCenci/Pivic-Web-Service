@@ -3,14 +3,17 @@
         <h1 class="main__title">Adicionar Agenda</h1>
         <form  action="{% url 'formulario:nova_agenda' %}" method="POST" enctype="">
             {%csrf_token%}
-                {%for field in form%}
-                <div>
+                <div class="form__item">
+                    {%for field in form%}
                     <label for="{{field.id_for_label}}">{{field.label}}</label>
                     {{field}}
+                    {%endfor%}
                 </div>
-                {%endfor%}
-                <button class="btn btn-success">
-                    Salvar
-                </button>
-                <a class="btn btn-danger" href="{% url 'formulario:index' %}">Voltar ao Menu</a>
+                <div class="form__btn">
+                    <button class="btn btn-success">
+                        Salvar
+                    </button>
+                    <a class="btn btn-danger" href="{% url 'formulario:index' %}">Voltar ao Menu</a>
+                </div>
+                
 {%endblock%}
