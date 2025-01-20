@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -12,40 +12,129 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+    border: 0%;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
 }
-
+.container{
+    margin: 0%;
+    padding: 0%;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    
+}
 .main{
+    margin-top: 2.5%;
+    align-items: center;
     display: flex;
     flex-direction: column;
+    width: calc(100% - 30%);
+    height: auto;
+    gap: 2.5rem;
+}
+.main__head{
+    display: flex;
     align-items: center;
-    margin: 5% 3% 0% 3%;
+    justify-content: center;
     gap: 1rem;
 }
 .main__title{
+    margin-left: 40%;
+    color: #333333;
     font-family: "Roboto", sans-serif;
     font-weight: 600;
     font-size: 40px;
 }
-.container{
+
+.sidebar{
+    height: auto;
+    width: 30%;
+    background-color: #030e20;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 3rem;
+    flex-direction: column;
+
+}
+.sidebar__header{
+    margin-left: 5%;
+    height: 10%;
+    display: flex;
+    text-align: center;
+    gap: 2%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 35px;
+    font-weight: 600;
+    border: white;
+    color: #A67E15;
+    padding-bottom: 3%;
+    border-bottom: 1px solid #A67E15;
+}
+.sidebar__nav{
+    display: flex;
+    flex-direction: column;
+    margin: 15% 0% 0% 5%;
+    gap: 10%;
+    width: 100%;
+    height: 90%;
+}
+.sidebar__img{
+    width: 9%;
+}
+.sidebar__dashboard{
+    align-items: baseline;
+    display: flex;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    color: #7e8e98;
+    font-size: 20px;
+    border-bottom: 1.5px solid #7e8e98;
+    width: 70%;
+    gap: 4px;
+}
+.sidebar__btn{
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    color: #7e8e98;
+    border-bottom: 1.5px solid #7e8e98;
     width: 70%;
 }
+.sidebar__btn:hover{
+    color: white;
+}
 
-#container__btn{
-    width: 30%;
-    height: 5rem;
-    padding-top: 2.5%;
-    text-align: center;
-    font-family: "Roboto", sans-serif;
+.form__item {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* 1 coluna para labels e 1 maior para inputs */
+    gap: 10px 20px; /* Espaçamento entre as linhas e colunas */
+    max-width: 100%; /* Ajuste de largura do formulário */
+}
+
+.form__item label {
+    text-align: left; /* Alinha o texto das labels à direita */
+    padding-right: 10px; /* Espaço entre o texto da label e o campo */
+}
+
+.form__item input {
+    width: 100%; /* Faz os campos ocuparem todo o espaço disponível */
+    padding: 5px; /* Adiciona espaço interno aos campos */
+    box-sizing: border-box; /* Garante que o padding não ultrapasse o tamanho definido */
+}
+.form__btn{
+    justify-content: space-between;
+    margin-top: 3%;
+    display: flex;
+    gap: 10%;
 }
 
 input[readonly] {

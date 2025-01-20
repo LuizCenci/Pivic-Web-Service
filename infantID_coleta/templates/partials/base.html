@@ -11,12 +11,16 @@
     <title>Document</title>
 </head>
 <body>
-    <section class="main">
-        {%include 'partials/alerts.html'%}
-        {%block content%}
-        
-        {%endblock%}
-    </section>
-    
+    <div class="container">
+        {% include 'partials/sidebar.html' %}   
+        <section class="main">
+            {%include 'partials/alerts.html'%}
+            
+            {%block content%}
+            
+            {%endblock%}
+        </section>
+    </div>
+   
 </body>
 </html>             

@@ -1,0 +1,20 @@
+{% load static %}
+{%block content%}
+    <aside class="sidebar">
+        <div class="sidebar__header">
+            <img width="20%" src="{% static 'icons/infantid-logo.png' %}" alt="">
+            <h1 class="sidebar__tltle">INFANTID  CADASTROS</h1>
+        </div>
+        <div class="sidebar__nav">
+            <a class="sidebar__dashboard" href="{% url 'formulario:index' %}">
+                <img class="sidebar__img" src="{% static 'icons/botao-home-cinza.png' %}" alt="">Home</a>
+            <a class="sidebar__btn"   href="{%url 'formulario:novo_responsavel'%}">Cadastrar Responsável</a>
+            <a class="sidebar__btn"   href="{%url 'formulario:novo_cadastro'%}">Adicionar Novo Cadastro</a>
+            <a class="sidebar__btn"   href="{%url 'formulario:novo_coletista'%}">Cadastrar Coletista</a>
+            <a class="sidebar__btn"   href="{%url 'formulario:novo_hospital'%}">Cadastrar Hospital</a>
+            <a class="sidebar__btn"   href="{%url 'formulario:nova_agenda'%}">Adicionar Agenda</a>
+            <a class="sidebar__btn"   href="{%url 'formulario:nova_recoleta'%}">Adicionar Recoleta</a> 
+        </div>  
+    </aside>
+    
+{%endblock%}
