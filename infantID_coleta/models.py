@@ -155,6 +155,7 @@ class HistoricoEndereco(models.Model):
     bairro_antigo = models.CharField(max_length=20, blank=True, null=True)
     endereco_antigo = models.CharField(max_length=45, blank=True, null=True)
     pais_antigo = models.CharField(max_length=50, blank=True, null=True)
+    data_alteracao = models.DateField(auto_now_add=True)
 
     class Meta:
         db_table = 'historico_endereco'

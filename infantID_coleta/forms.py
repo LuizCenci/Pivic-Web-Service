@@ -178,8 +178,9 @@ class cadastro_Recoleta(forms.ModelForm):
 class alteracao_endereco(forms.ModelForm):
     responsavel = forms.ModelChoiceField(
         queryset=Responsvel.objects.all(),
+        to_field_name="nome_responsavel",
         required=True,
-        widget=forms.TextInput(attrs={'class': 'autocomplete', 'id': 'id_responsavel'})  # ID correto
+        widget=forms.TextInput(attrs={'class': 'autocomplete', 'id': 'id_responsavel'})
     )
     cep_atualizado = forms.CharField(max_length=10, required=True)
     bairro_atualizado = forms.CharField(max_length=20, required=True)

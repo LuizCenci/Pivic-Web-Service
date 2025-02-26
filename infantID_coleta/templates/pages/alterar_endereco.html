@@ -16,37 +16,37 @@
         </div>
     </form>
 
-    <!-- Inclua o jQuery e o jQuery UI -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
-    <!-- Seu JavaScript corrigido -->
+
     <script>
-    $(document).ready(function() {
-        $('#id_responsavel').autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: '{% url "formulario:buscar_responsavel" %}', 
-                    data: {
-                        'q': request.term  
-                    },
-                    success: function(data) {
-                        response($.map(data.results, function(item) {
-                            return {
-                                label: item.nome_responsavel,  
-                                value: item.id_responsavel    
-                            };
-                        }));
-                    }
-                });
-            },
-            minLength: 2,  
-            select: function(event, ui) {
-                $('#id_responsavel').val(ui.item.label);
-                return false;  
-            }
+        $(document).ready(function() {
+            $('#id_responsavel').autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: '{% url "formulario:buscar_responsavel" %}', 
+                        data: {
+                            'q': request.term  
+                        },
+                        success: function(data) {
+                            response($.map(data.results, function(item) {
+                                return {
+                                    label: item.nome_responsavel,  
+                                    value: item.id_responsavel    
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,  
+                select: function(event, ui) {
+                    $('#id_responsavel').val(ui.item.label);
+                    $('#responsavel_id').val(ui.item.value); 
+                    return false;  
+                }
+            });
         });
-    });
-    </script>
+        </script>
 {% endblock %}

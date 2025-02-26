@@ -146,15 +146,16 @@ def alterar_endereco(request):
             responsavel = form.cleaned_data['responsavel']
             form.instance.cep_antigo = responsavel.cep
             form.instance.estado_antigo = responsavel.estado
-            form.instance.bairro_antigo = responsavel.bairro
-            form.instance.endereco_antigo = responsavel.endereco
+            form.instance.bairro_antigo = responsavel.bairro_atual
+            form.instance.endereco_antigo = responsavel.endereco_atual
             form.instance.pais_antigo = responsavel.pais
             responsavel.cep = form.cleaned_data['cep_atualizado']
-            responsavel.endereco = form.cleaned_data['endereco_atualizado']
-            responsavel.bairro = form.cleaned_data['bairro_atualizado']
+            responsavel.endereco_atual = form.cleaned_data['endereco_atualizado']
+            responsavel.bairro_atual = form.cleaned_data['bairro_atualizado']
+            form.save()
+            responsavel.save()
+            messages.success(request, 'Endereço alterado com sucesso!')
 
-        responsavel.save()
-        form.save()
         return redirect('formulario:index')
     else:
         form = alteracao_endereco()
