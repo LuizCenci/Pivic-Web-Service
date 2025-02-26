@@ -143,3 +143,9 @@ input[readonly] {
     border-color: #ccc; /* Borda cinza */
     cursor: not-allowed; /* Ícone de "não permitido" */
 }
+input::placeholder,
+textarea::placeholder {
+    color: rgb(157, 157, 157) !important;
+    opacity: 1 !important;
+}   
+
