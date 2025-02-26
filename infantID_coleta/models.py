@@ -139,3 +139,23 @@ class Responsvel(models.Model):
 
     def __str__(self):
         return f'{self.id_responsavel} - {self.nome_responsavel}'
+    
+
+class HistoricoEndereco(models.Model):
+    responsavel = models.ForeignKey('Responsvel', models.DO_NOTHING, db_column='responsavel', blank=True, null=True)
+    cep_atualizado = models.CharField(max_length=10, blank=True, null=True)  
+    estado_atualizado = models.CharField(max_length=50, blank=True, null=True)
+    cidade_atualizado = models.CharField(max_length=50, blank=True, null=True)
+    bairro_atualizado = models.CharField(max_length=20, blank=True, null=True)
+    endereco_atualizado = models.CharField(max_length=45, blank=True, null=True)
+    pais_atualizado = models.CharField(max_length=50, blank=True, null=True)
+    cep_antigo = models.CharField(max_length=10, blank=True, null=True)  
+    estado_antigo = models.CharField(max_length=50, blank=True, null=True)
+    cidade_antigo = models.CharField(max_length=50, blank=True, null=True)
+    bairro_antigo = models.CharField(max_length=20, blank=True, null=True)
+    endereco_antigo = models.CharField(max_length=45, blank=True, null=True)
+    pais_antigo = models.CharField(max_length=50, blank=True, null=True)
+    data_alteracao = models.DateField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'historico_endereco'

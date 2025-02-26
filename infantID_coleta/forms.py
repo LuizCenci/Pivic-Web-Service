@@ -173,3 +173,35 @@ class cadastro_Recoleta(forms.ModelForm):
             ),
             'idcadastro':forms.Select(attrs={'class':'form-control'})
         }
+
+
+class alteracao_endereco(forms.ModelForm):
+    responsavel = forms.ModelChoiceField(
+        queryset=Responsvel.objects.all(),
+        to_field_name="nome_responsavel",
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'autocomplete', 'id': 'id_responsavel'})
+    )
+    cep_atualizado = forms.CharField(max_length=10, required=True)
+    bairro_atualizado = forms.CharField(max_length=20, required=True)
+
+    class Meta:
+        model = HistoricoEndereco
+        fields = ("responsavel", "cep_atualizado", "bairro_atualizado", "endereco_atualizado")
+
+        labels = {
+            'pais': '',
+            'responsavel':'Nome do Responsável',
+            'cep_atualizado': 'CEP',
+            'bairro_atualizado':'Bairro',
+            'endereco_atualizado':'Endereço',
+        }
+        widgets = {
+            'pais': forms.HiddenInput(),
+            'responsavel':forms.TextInput(attrs={'class':'form-control'}),
+            'cep_atualizado':forms.TextInput(attrs={'class':'form-control'}),
+            'endereco_atualizado':forms.TextInput(attrs={'class':'form-control'}),
+            'bairro_atualizado':forms.TextInput(attrs={'class':'form-control'}),
+
+        }
+

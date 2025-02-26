@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.http import Http404
 from infantID_coleta.models import *
 from infantID_coleta.forms import *
 from django.contrib import messages
 
-# Create your views here.
+
 def index(request):
     return render(request, 'pages/index.html')
 
@@ -21,6 +22,7 @@ def novo_responsavel(request):
 
     context = {'form':responsavel}
     return render(request, 'pages/novo_responsavel.html', context)
+
 
 
 def novo_cadastro_view(request):
@@ -86,6 +88,7 @@ def novo_hospital(request):
     return render(request, 'pages/novo_hospital.html', context)
 
 
+
 def nova_agenda(request):
     agenda = cadastro_Agenda()
     if request.method == 'POST':
@@ -98,11 +101,15 @@ def nova_agenda(request):
     context = {'form':agenda}
     return render(request, 'pages/nova_agenda.html', context)
 
+
+
 def nova_recoleta_view(request):
     recoleta_form_data = request.session.get('recoleta_form_data', None)
     form = cadastro_Recoleta(recoleta_form_data)
     context = {'form':form}
     return render(request, 'pages/nova_recoleta.html', context)
+
+
 
 def nova_recoleta_create(request):
     if not request.POST:
@@ -129,3 +136,39 @@ def nova_recoleta_create(request):
         return redirect('formulario:index')
 
     return redirect('formulario:nova_recoleta')
+
+
+
+def alterar_endereco(request):
+    if request.method == 'POST':
+        form = alteracao_endereco(request.POST)
+        if form.is_valid():
+            responsavel = form.cleaned_data['responsavel']
+            form.instance.cep_antigo = responsavel.cep
+            form.instance.estado_antigo = responsavel.estado
+            form.instance.bairro_antigo = responsavel.bairro_atual
+            form.instance.endereco_antigo = responsavel.endereco_atual
+            form.instance.pais_antigo = responsavel.pais
+            responsavel.cep = form.cleaned_data['cep_atualizado']
+            responsavel.endereco_atual = form.cleaned_data['endereco_atualizado']
+            responsavel.bairro_atual = form.cleaned_data['bairro_atualizado']
+            form.save()
+            responsavel.save()
+            messages.success(request, 'Endereço alterado com sucesso!')
+
+        return redirect('formulario:index')
+    else:
+        form = alteracao_endereco()
+
+    context = {'form': form}
+    return render(request, 'pages/alterar_endereco.html', context)
+
+
+def buscar_responsavel(request):
+    if 'q' in request.GET:
+        query = request.GET['q']
+        responsaveis = Responsvel.objects.filter(nome_responsavel__icontains=query)  # Busca no nome_responsavel
+        results = [{'nome_responsavel': r.nome_responsavel, 'id_responsavel': r.id_responsavel} for r in responsaveis]  # Retorna nome e id
+        return JsonResponse({'results': results})
+    return JsonResponse({'results': []})
+
