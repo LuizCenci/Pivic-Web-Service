@@ -180,24 +180,41 @@ class alteracao_endereco(forms.ModelForm):
         queryset=Responsvel.objects.all(),
         to_field_name="nome_responsavel",
         required=True,
-        widget=forms.TextInput(attrs={'class': 'autocomplete', 'id': 'id_responsavel'})
-    )
-    cep_atualizado = forms.CharField(max_length=10, required=True)
-    bairro_atualizado = forms.CharField(max_length=20, required=True)
+        widget=forms.TextInput(attrs={'class': 'autocomplete form-control', 'id': 'id_responsavel'}),
+        label='Responsável')
+    
+    cep_atualizado = forms.CharField(
+        max_length=10,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_cep'}),
+        label='CEP')
+    
+    cidade_atualizado = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_cidade', 'readonly': True}),
+        label='Cidade')
+    
+    estado_atualizado = forms.CharField(
+        max_length=2,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_estado', 'readonly': True}),
+        label='Estado')
+    
 
     class Meta:
         model = HistoricoEndereco
-        fields = ("responsavel", "cep_atualizado", "bairro_atualizado", "endereco_atualizado")
+        fields = ("responsavel", "cep_atualizado", "cidade_atualizado", "estado_atualizado", "bairro_atualizado", "endereco_atualizado")
 
         labels = {
-            'pais': '',
+            'pais_atualizado': '',
             'responsavel':'Nome do Responsável',
             'cep_atualizado': 'CEP',
             'bairro_atualizado':'Bairro',
             'endereco_atualizado':'Endereço',
         }
         widgets = {
-            'pais': forms.HiddenInput(),
+            'pais_atualizado': forms.HiddenInput(),
             'responsavel':forms.TextInput(attrs={'class':'form-control'}),
             'cep_atualizado':forms.TextInput(attrs={'class':'form-control'}),
             'endereco_atualizado':forms.TextInput(attrs={'class':'form-control'}),

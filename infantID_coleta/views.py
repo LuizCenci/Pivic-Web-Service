@@ -12,8 +12,11 @@ def index(request):
 
 def novo_responsavel(request):
     if request.method == 'POST':
-        responsavel = cadastro_responsavel(request.POST)
-        if responsavel.is_valid():
+        form = cadastro_responsavel(request.POST)
+        if form.is_valid():
+            responsavel = form.save(commit=False)
+            responsavel.endereco_atual = responsavel.endereco_cadastro
+            responsavel.bairro_atual = responsavel.bairro_cadastro
             responsavel.save()
             messages.success(request, 'Responsável adicionado com sucesso!')
             return redirect('formulario:index')

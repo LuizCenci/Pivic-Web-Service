@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cepInput = document.getElementById('id_cep');
     const cidadeInput = document.getElementById('id_cidade');
     const estadoInput = document.getElementById('id_estado');
-    const paisInput = document.getElementById('id_pais');  // Campo oculto do país
+    const paisInput = document.getElementById('id_pais');
     
     // Desabilitar campos de cidade, estado e país
     cidadeInput.setAttribute('readonly', true);
