@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Desabilitar campos de cidade, estado e país
     cidadeInput.setAttribute('readonly', true);
     estadoInput.setAttribute('readonly', true);
-    paisInput.setAttribute('readonly', true);  // Desabilitar o campo de país
+    paisInput.setAttribute('readonly', true); 
 
     cepInput.addEventListener('blur', function () {
         let cep = cepInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         cidadeInput.value = data.localidade;
                         estadoInput.value = data.uf;
-                        paisInput.value = 'Brasil';  // Preenchendo o campo país com "Brasil"
+                        paisInput.value = 'Brasil';
                     }
                 })
                 .catch(error => alert('Erro ao buscar CEP.'));
@@ -33,10 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Limpar os campos de cidade, estado e país quando o usuário apagar o CEP
     cepInput.addEventListener('input', function () {
-        if (cepInput.value === '') {
-            cidadeInput.value = '';
-            estadoInput.value = '';
-            paisInput.value = '';  // Limpar o país
-        }
+        cidadeInput.value = '';
+        estadoInput.value = '';
+        paisInput.value = '';  
     });
-});
+})
