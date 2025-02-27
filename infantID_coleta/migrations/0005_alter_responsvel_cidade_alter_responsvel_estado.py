@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='responsvel',
             name='estado',
-            field=models.CharField(max_length=50, default='Pato Branco'),
+            field=models.CharField(max_length=50),
         ),
     ]
