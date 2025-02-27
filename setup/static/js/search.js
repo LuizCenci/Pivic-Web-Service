@@ -4,24 +4,23 @@ $(document).ready(function() {
             $.ajax({
                 url: '{% url "formulario:buscar_responsavel" %}', 
                 data: {
-                    'q': request.term  // Envia o termo digitado para o backend
+                    'q': request.term  
                 },
                 success: function(data) {
-                    // Mapeia os resultados para o formato esperado pelo autocomplete
                     response($.map(data.results, function(item) {
                         return {
-                            label: item.nome_responsavel,  // Texto exibido na sugestão
-                            value: item.id_responsavel    // Valor associado ao item
+                            label: item.nome_responsavel,  
+                            value: item.id_responsavel    
                         };
                     }));
                 }
             });
         },
-        minLength: 2,  // Só faz a busca após 2 caracteres
+        minLength: 2,  
         select: function(event, ui) {
-            // Quando um item é selecionado, preenche o campo com o nome do responsável
             $('#id_responsavel').val(ui.item.label);
-            return false;  // Impede que o valor padrão (ID) seja inserido no campo
+            $('#responsavel_id').val(ui.item.value); 
+            return false;  
         }
     });
 });
