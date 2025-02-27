@@ -159,3 +159,12 @@ class HistoricoEndereco(models.Model):
 
     class Meta:
         db_table = 'historico_endereco'
+
+
+class HistoricoTelefone(models.Model):
+    responsavel = models.ForeignKey('Responsvel', models.DO_NOTHING, db_column='responsavel', blank=False, null=True)
+    telefone_antigo = models.CharField(max_length=11, blank=False, null=True)
+    telefone_atualizado = models.CharField(max_length=11, blank=False, null=True)
+
+    class Meta:
+        db_table = 'historico_telefone'
