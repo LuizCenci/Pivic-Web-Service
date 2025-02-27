@@ -1,7 +1,7 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
-    <h1 class="main__title">Adicionar Agenda</h1>
+    <h1 class="main__title">Alterar Endereço</h1>
     <form action="{% url 'formulario:alterar_endereco' %}" method="POST" enctype="">
         {% csrf_token %}
         <div class="form__item">
