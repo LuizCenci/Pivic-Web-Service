@@ -30,13 +30,26 @@ class cadastro_responsavel(forms.ModelForm):
             'id_responsavel':forms.TextInput(attrs={'class':'form-control'}),
             'nome_responsavel':forms.TextInput(attrs={'class':'form-control'}),
             'telefone_responsavel':forms.TextInput(attrs={'class':'form-control'}),
-            'cep':forms.TextInput(attrs={'class':'form-control'}),
-            'estado': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
-            'cidade': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+            'cep':forms.TextInput(attrs={'class':'form-control','required': 'required'}),
+            'estado': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly', 'required': 'required'}),
+            'cidade': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly', 'required': 'required'}),
             'endereco_cadastro':forms.TextInput(attrs={'class':'form-control'}),
             'bairro_cadastro':forms.TextInput(attrs={'class':'form-control'}),
 
         }
+
+        def clean_cep(self):
+            cep = self.cleaned_data['cep']
+            return cep.replace('-', '')
+        
+        def clean(self):
+            cleaned_data = super().clean()
+            cidade = cleaned_data.get('cidade')
+            estado = cleaned_data.get('estado')
+            cep = cleaned_data.get('cep')
+            if not cidade or not estado or (cep<8):
+                raise forms.ValidationError("Preencha todos os campos.")
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -180,28 +193,34 @@ class alteracao_endereco(forms.ModelForm):
         queryset=Responsvel.objects.all(),
         to_field_name="nome_responsavel",
         required=True,
-        widget=forms.TextInput(attrs={'class': 'autocomplete form-control', 'id': 'id_responsavel'}),
+        widget=forms.TextInput(attrs={'class': 'autocomplete form-control', 'id': 'id_responsavel'}), 
         label='Responsável')
     
     cep_atualizado = forms.CharField(
         max_length=10,
         required=True,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_cep'}),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_cep'}),  
         label='CEP')
     
     cidade_atualizado = forms.CharField(
         max_length=100,
         required=True,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_cidade', 'readonly': True}),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_cidade', 'readonly': True}),  
         label='Cidade')
     
     estado_atualizado = forms.CharField(
         max_length=2,
         required=True,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_estado', 'readonly': True}),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_estado', 'readonly': True}),  
         label='Estado')
     
-
+    pais_atualizado = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.HiddenInput(attrs={'id': 'id_pais'}),
+        label=''
+    )
+    
     class Meta:
         model = HistoricoEndereco
         fields = ("responsavel", "cep_atualizado", "cidade_atualizado", "estado_atualizado", "bairro_atualizado", "endereco_atualizado")
@@ -219,6 +238,9 @@ class alteracao_endereco(forms.ModelForm):
             'cep_atualizado':forms.TextInput(attrs={'class':'form-control'}),
             'endereco_atualizado':forms.TextInput(attrs={'class':'form-control'}),
             'bairro_atualizado':forms.TextInput(attrs={'class':'form-control'}),
-
         }
+
+        def clean_cep_atualizado(self):
+            cep_atualizado = self.cleaned_data['cep_atualizado']
+            return cep_atualizado.replace('-', '')
 

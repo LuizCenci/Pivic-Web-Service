@@ -20,6 +20,9 @@ def novo_responsavel(request):
             responsavel.save()
             messages.success(request, 'Responsável adicionado com sucesso!')
             return redirect('formulario:index')
+        else:
+            messages.error(request, 'Preencha todos os campos.')
+            responsavel = cadastro_responsavel()
     else:
         responsavel = cadastro_responsavel()
 
@@ -148,10 +151,12 @@ def alterar_endereco(request):
         if form.is_valid():
             responsavel = form.cleaned_data['responsavel']
             form.instance.cep_antigo = responsavel.cep
+            form.instance.cidade_antigo = responsavel.cidade
             form.instance.estado_antigo = responsavel.estado
             form.instance.bairro_antigo = responsavel.bairro_atual
             form.instance.endereco_antigo = responsavel.endereco_atual
             form.instance.pais_antigo = responsavel.pais
+            form.instance.pais_atualizado = form.cleaned_data['pais_atualizado']
             responsavel.cep = form.cleaned_data['cep_atualizado']
             responsavel.endereco_atual = form.cleaned_data['endereco_atualizado']
             responsavel.bairro_atual = form.cleaned_data['bairro_atualizado']
