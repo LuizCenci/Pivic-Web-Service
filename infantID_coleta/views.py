@@ -180,3 +180,5 @@ def buscar_responsavel(request):
         return JsonResponse({'results': results})
     return JsonResponse({'results': []})
 
+def atualizacao_cadastral(request):
+    return render(request, 'pages/atualizacao_cadastral.html')

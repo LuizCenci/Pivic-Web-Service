@@ -14,4 +14,5 @@ urlpatterns = [
     path('nova-recoleta/create', nova_recoleta_create, name='nova_recoleta_create'),
     path('alterar-endereco', alterar_endereco, name='alterar_endereco'),
     path('buscar-responsavel/', buscar_responsavel, name='buscar_responsavel'),
+    path('atualizacao_cadastral/', atualizacao_cadastral, name='atualizacao_cadastral'),
 ]       

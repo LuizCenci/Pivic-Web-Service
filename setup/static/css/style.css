@@ -37,6 +37,7 @@ time, mark, audio, video {
     width: calc(100% - 30%);
     height: auto;
     gap: 2.5rem;
+    flex-grow: 1;
 }
 .main__head{
     display: flex;
