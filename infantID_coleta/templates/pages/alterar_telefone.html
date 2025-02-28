@@ -1,8 +1,8 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
-    <h1 class="main__title">Alterar Endereço</h1>
-    <form action="{% url 'formulario:alterar_endereco' %}" method="POST" enctype="">
+    <h1 class="main__title">Alterar Telefone</h1>
+    <form action="{% url 'formulario:alterar_telefone' %}" method="POST" enctype="">
         {% csrf_token %}
         <div class="form__item">
             {% for field in form %}

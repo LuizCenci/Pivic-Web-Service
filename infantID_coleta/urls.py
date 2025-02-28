@@ -12,7 +12,9 @@ urlpatterns = [
     path('nova-agenda/', nova_agenda, name='nova_agenda'),
     path('nova-recoleta/', nova_recoleta_view, name='nova_recoleta'),
     path('nova-recoleta/create', nova_recoleta_create, name='nova_recoleta_create'),
+    path('alterar-dados', alterar_dados, name='alterar_dados'),
     path('alterar-endereco', alterar_endereco, name='alterar_endereco'),
+    path('alterar-telefone', alterar_telefone, name='alterar_telefone'),
     path('buscar-responsavel/', buscar_responsavel, name='buscar_responsavel'),
     path('atualizacao_cadastral/', atualizacao_cadastral, name='atualizacao_cadastral'),
 ]       

@@ -244,3 +244,27 @@ class alteracao_endereco(forms.ModelForm):
             cep_atualizado = self.cleaned_data['cep_atualizado']
             return cep_atualizado.replace('-', '')
 
+
+
+class alteracao_telefone(forms.ModelForm):
+    responsavel = forms.ModelChoiceField(
+        queryset=Responsvel.objects.all(),
+        to_field_name="nome_responsavel",
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'autocomplete form-control', 'id': 'id_responsavel'}), 
+        label='Responsável')
+
+    class Meta:
+        model = HistoricoTelefone
+        fields = ('responsavel', 'telefone_atualizado')
+        exclude = ['telefone_antigo']
+
+        labels = {'telefone_atualizado': 'Telefone'}
+        widgets = {'telefone_atualizado':forms.NumberInput(attrs={'class':'form-control'})}
+
+        def clean(self):
+            cleaned_data = super().clean()
+            responavel = cleaned_data.get('responsavel')
+            telefone = cleaned_data.get('telefone_atualizado')
+            if not responavel or not telefone:
+                raise forms.ValidationError("Preencha todos os campos.")

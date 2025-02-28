@@ -166,10 +166,41 @@ def alterar_endereco(request):
 
         return redirect('formulario:index')
     else:
+
         form = alteracao_endereco()
 
     context = {'form': form}
     return render(request, 'pages/alterar_endereco.html', context)
+
+
+
+def alterar_telefone(request):
+    if request.method == "POST":
+        form = alteracao_telefone(request.POST)
+        print(form)
+        if form.is_valid:
+            responsavel = form.cleaned_data['responsavel']
+            form.instance.telefone_antigo = responsavel.telefone_responsavel
+            responsavel.telefone_responsavel = form.cleaned_data['telefone_atualizado']
+            form.save()
+            responsavel.save()
+            messages.success(request, 'Telefone alterado com sucesso!')
+            return redirect('formulario:index')
+        else:
+            messages.error(request, 'Preencha todos os dados corretamente.')
+            form = alteracao_telefone()
+        
+    else:
+        form = alteracao_telefone()
+
+
+    context ={'form': form}
+    return render(request, 'pages/alterar_telefone.html', context)
+
+
+
+def alterar_dados(request):
+    return render(request, 'pages/alterar_dados.html')
 
 
 def buscar_responsavel(request):
