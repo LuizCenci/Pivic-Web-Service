@@ -7,7 +7,10 @@ from django.contrib import messages
 
 
 def index(request):
-    return render(request, 'pages/index.html')
+    cadastros = Cadastro.objects.order_by('-data_coleta')[:5]
+    agenda = Agenda.objects.order_by('-data_agenda')[:5]
+    context = {'cadastros':cadastros, 'agenda':agenda}
+    return render(request, 'pages/index.html', context)
 
 
 def novo_responsavel(request):
@@ -197,12 +200,6 @@ def alterar_telefone(request):
     context ={'form': form}
     return render(request, 'pages/alterar_telefone.html', context)
 
-
-
-def alterar_dados(request):
-    return render(request, 'pages/alterar_dados.html')
-
-
 def buscar_responsavel(request):
     if 'q' in request.GET:
         query = request.GET['q']
@@ -210,4 +207,7 @@ def buscar_responsavel(request):
         results = [{'nome_responsavel': r.nome_responsavel, 'id_responsavel': r.id_responsavel} for r in responsaveis]  # Retorna nome e id
         return JsonResponse({'results': results})
     return JsonResponse({'results': []})
+
+def atualizacao_cadastral(request):
+    return render(request, 'pages/atualizacao_cadastral.html')
 

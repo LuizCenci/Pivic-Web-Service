@@ -1,5 +1,70 @@
 {%extends 'partials/base.html'%}
 {% load static %}
 {%block content%}
-        
+    <h1 class="table-title">Últimos Cadastros</h1>
+    <table class="container-table">
+      
+      <thead >
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">
+            ID
+          </th>
+          <th scope="col">
+            Data Coleta
+          </th>
+          <th scope="col">
+            coletista
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cadastro in cadastros %}
+        <tr>
+          
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{cadastro.id_cadastro}}</td>
+          <td>{{cadastro.data_coleta}}</td>
+          <td>{{cadastro.nome_coletista}}</td>
+          
+        </tr>
+        {%endfor%}
+      </tbody>
+      
+    </table>
+    <h1 class="table-title">Agenda</h1>
+    <table class="container-table">
+      
+      <thead >
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">
+            Data
+          </th>
+          <th scope="col">
+            Tipo de Recoleta
+          </th>
+          <th scope="col">
+            Cadastro
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in agenda %}
+        <tr>
+          
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{item.data_agenda}}</td>
+          <td>{{item.tipo_rc}}</td>
+          <td>{{item.id_cadastro}}</td>
+          
+        </tr>
+        {%endfor%}
+      </tbody>
+      
+    </table>
+
+  
+
+  
 {%endblock%}

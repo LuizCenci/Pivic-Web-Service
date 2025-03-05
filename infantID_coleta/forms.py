@@ -260,7 +260,7 @@ class alteracao_telefone(forms.ModelForm):
         exclude = ['telefone_antigo']
 
         labels = {'telefone_atualizado': 'Telefone'}
-        widgets = {'telefone_atualizado':forms.NumberInput(attrs={'class':'form-control'})}
+        widgets = {'telefone_atualizado':forms.TextInput(attrs={'class':'form-control'})}
 
         def clean(self):
             cleaned_data = super().clean()

@@ -133,6 +133,7 @@ class Responsvel(models.Model):
     endereco_atual = models.CharField(max_length=45, blank=True, null=True)
     bairro_atual = models.CharField(max_length=20, blank=True, null=True)
     pais = models.CharField(max_length=50, blank=True, null=True)
+    data_criacao = models.DateTimeField(auto_now_add=True)  # Captura a data de criação
 
     class Meta:
         db_table = 'responsavel'
