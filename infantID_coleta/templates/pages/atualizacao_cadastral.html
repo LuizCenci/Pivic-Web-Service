@@ -1,14 +1,16 @@
 {%extends 'partials/base.html'%}
 {%block content%}
-    <h1 class="main__title">Atualizar Dados</h1>
-    
-    <div class="row">
-        <div class="col-6">
-            <a class="btn btn-dark" href="{% url 'formulario:alterar_endereco' %}">Alterar Endereço</a>
-        </div>
-        <div class="col">
-            <a class="btn btn-dark" href="{% url 'formulario:alterar_endereco' %}">Alterar Endereço</a>
+    <h1 class="main__title">Atualização Cadastral</h1>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-6">
+                <a class="btn btn-dark" href="{% url 'formulario:alterar_endereco' %}">Alterar Endereço</a>
+            </div>
+            <div class="col-6">
+                <a class="btn btn-dark" href="{% url 'formulario:alterar_telefone' %}">Alterar Telefone</a>
+            </div>
         </div>
     </div>
+    
     
 {%endblock%}
